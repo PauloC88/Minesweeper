@@ -1,0 +1,49 @@
+.card-header {
+	background-color: fuchsia;
+	height: 30px;
+	padding-left: 20px;
+	padding-top: 0px;
+}
+
+.card-body {
+	height: 30px;
+	background-color: lightgrey;
+	display: grid;
+	grid-template-columns: 215px 40px 175px 40px;
+	padding-top: 1px;
+	padding-left: 5px;
+	align-items: center;
+}
+
+#new-game {
+	width: 40px;
+	border: transparent;
+	background-color: lightgrey;
+}
+
+#seconds-counter {
+	text-align: right; 
+	padding-right: 5px; 
+	border: 2px solid blueviolet; 
+}
+
+.grid-container {
+	background-color: fuchsia;
+	display: grid;
+}
+
+.grid-button {
+	text-align: center;
+	font-weight: bold;
+	font-size: 20px;
+	color: blue;
+	height: 30px;
+}
+
+.detonated-bomb {
+	background-image: url("Bomb.png");
+}
+
+.flagged-button {
+	background-image: url("Flag.png");
+}
