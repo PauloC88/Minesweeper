@@ -150,13 +150,15 @@ function flagButton(gridButton) {
   if(gameIsOver) {
     return;
   }
-  if (flagsNumber < bombsNumber && !gridButton.classList.contains("pushed-button")) {
+  if (flagsNumber <= bombsNumber && !gridButton.classList.contains("pushed-button")) {
     let flagsLeft;
     if (!gridButton.classList.contains("flagged-button")) {
-      gridButton.classList.add("flagged-button");
-      ++flagsNumber;
-      flagsLeft = bombsNumber - flagsNumber;
-      flagsLeftBoard.innerHTML = "<b>Flags left: " + flagsLeft + "</b>";
+      if (flagsNumber < bombsNumber) {
+        gridButton.classList.add("flagged-button");
+        ++flagsNumber;
+        flagsLeft = bombsNumber - flagsNumber;
+        flagsLeftBoard.innerHTML = "<b>Flags left: " + flagsLeft + "</b>";
+      }
     } else {
       gridButton.classList.remove("flagged-button");
       --flagsNumber;
