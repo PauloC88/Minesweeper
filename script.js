@@ -51,55 +51,29 @@ function createGrid(grid_size, bombs_number) {
   }
   let nearbyBombs = Array(gridSize * gridSize).fill(0);
   for (let id of bombsArray) {
-    if (id === 0) {
-      ++nearbyBombs[1];
-      ++nearbyBombs[gridSize];
-      ++nearbyBombs[gridSize + 1];
-    } else if (id === gridSize - 1) {
-      ++nearbyBombs[id - 1];
-      ++nearbyBombs[id + gridSize - 1];
-      ++nearbyBombs[id + gridSize];
-    } else if (id === gridSize * (gridSize - 1)) {
-      ++nearbyBombs[id - gridSize];
-      ++nearbyBombs[id - gridSize + 1];
+    if (id % gridSize != gridSize - 1) {
       ++nearbyBombs[id + 1];
-    } else if (id === gridSize * gridSize - 1) {
-      ++nearbyBombs[id - gridSize - 1];
-      ++nearbyBombs[id - gridSize];
+    }
+    if (id % gridSize != 0) {
       ++nearbyBombs[id - 1];
-    } else if (id < gridSize - 1) {
-      ++nearbyBombs[id - 1];
-      ++nearbyBombs[id + 1];
-      ++nearbyBombs[id + gridSize - 1];
+    }
+    if (id < gridSize * (gridSize - 1)) {
       ++nearbyBombs[id + gridSize];
+    }
+    if ((id < gridSize * (gridSize - 1)) && (id % gridSize != gridSize - 1)) {
       ++nearbyBombs[id + gridSize + 1];
-    } else if (id > gridSize * (gridSize - 1)) {
-      ++nearbyBombs[id - 1];
-      ++nearbyBombs[id + 1];
-      ++nearbyBombs[id - gridSize + 1];
-      ++nearbyBombs[id - gridSize];
-      ++nearbyBombs[id - gridSize - 1];
-    } else if (id % gridSize === 0) {
-      ++nearbyBombs[id - gridSize];
-      ++nearbyBombs[id + gridSize];
-      ++nearbyBombs[id - gridSize + 1];
-      ++nearbyBombs[id + 1];
-      ++nearbyBombs[id + gridSize + 1];
-    } else if (id % gridSize === gridSize - 1) {
-      ++nearbyBombs[id - gridSize];
-      ++nearbyBombs[id + gridSize];
+    }
+    if ((id < gridSize * (gridSize - 1)) && (id % gridSize != 0)) {
       ++nearbyBombs[id + gridSize - 1];
-      ++nearbyBombs[id - 1];
-      ++nearbyBombs[id - gridSize - 1];
-    } else {
-      ++nearbyBombs[id - gridSize - 1];
+    }
+    if (id > gridSize - 1) {
       ++nearbyBombs[id - gridSize];
+    }
+    if ((id > gridSize - 1) && (id % gridSize != 0)) {
+      ++nearbyBombs[id - gridSize - 1];
+    }
+    if ((id > gridSize - 1) && (id % gridSize != gridSize - 1)) {
       ++nearbyBombs[id - gridSize + 1];
-      ++nearbyBombs[id - 1];
-      ++nearbyBombs[id + 1];
-      ++nearbyBombs[id + gridSize - 1];
-      ++nearbyBombs[id + gridSize];
-      ++nearbyBombs[id + gridSize + 1];
     }
   }
   for(let i = 0; i < gridSize * gridSize; ++i) {
@@ -202,55 +176,30 @@ function displayColor(nearbyBombs, gridButton) {
 
 function checkNearbyButtons(id) {
   setTimeout(() => {
-    if (parseInt(id) === 0) {
-      click(1);
-      click(gridSize);
-      click(gridSize + 1);
-    } else if (parseInt(id) === gridSize - 1) {
-      click(parseInt(id) - 1);
-      click(parseInt(id) + gridSize - 1);
-      click(parseInt(id) + gridSize);
-    } else if (parseInt(id) === gridSize * (gridSize - 1)) {
-      click(parseInt(id) - gridSize);
-      click(parseInt(id) - gridSize + 1);
-      click(parseInt(id) + 1);
-    } else if (parseInt(id) === gridSize * gridSize - 1) {
-      click(parseInt(id) - gridSize - 1);
-      click(parseInt(id) - gridSize);
-      click(parseInt(id) - 1);
-    } else if (parseInt(id) < gridSize - 1) {
-      click(parseInt(id) - 1);
-      click(parseInt(id) + 1);
-      click(parseInt(id) + gridSize - 1);
-      click(parseInt(id) + gridSize);
-      click(parseInt(id) + gridSize + 1);
-    } else if (parseInt(id) > gridSize * (gridSize - 1)) {
-      click(parseInt(id) - 1);
-      click(parseInt(id) + 1);
-      click(parseInt(id) - gridSize + 1);
-      click(parseInt(id) - gridSize);
-      click(parseInt(id) - gridSize - 1);
-    } else if (parseInt(id) % gridSize === 0) {
-      click(parseInt(id) - gridSize);
-      click(parseInt(id) + gridSize);
-      click(parseInt(id) - gridSize + 1);
-      click(parseInt(id) + 1);
-      click(parseInt(id) + gridSize + 1);
-    } else if (parseInt(id) % gridSize === gridSize - 1) {
-      click(parseInt(id) - gridSize);
-      click(parseInt(id) + gridSize);
-      click(parseInt(id) + gridSize - 1);
-      click(parseInt(id) - 1);
-      click(parseInt(id) - gridSize - 1);
-    } else {
-      click(parseInt(id) - gridSize - 1);
-      click(parseInt(id) - gridSize);
-      click(parseInt(id) - gridSize + 1);
-      click(parseInt(id) - 1);
-      click(parseInt(id) + 1);
-      click(parseInt(id) + gridSize - 1);
-      click(parseInt(id) + gridSize);
-      click(parseInt(id) + gridSize + 1);
+    id = parseInt(id);
+    if (id % gridSize != gridSize - 1) {
+      click(id + 1);
+    }
+    if (id % gridSize != 0) {
+      click(id - 1);
+    }
+    if (id < gridSize * (gridSize - 1)) {
+      click(id + gridSize);
+    }
+    if ((id < gridSize * (gridSize - 1)) && (id % gridSize != gridSize - 1)) {
+      click(id + gridSize + 1);
+    }
+    if ((id < gridSize * (gridSize - 1)) && (id % gridSize != 0)) {
+      click(id + gridSize - 1);
+    }
+    if (id > gridSize - 1) {
+      click(id - gridSize);
+    }
+    if ((id > gridSize - 1) && (id % gridSize != 0)) {
+      click(id - gridSize - 1);
+    }
+    if ((id > gridSize - 1) && (id % gridSize != gridSize - 1)) {
+      click(id - gridSize + 1);
     }
   }, 5)
 }
