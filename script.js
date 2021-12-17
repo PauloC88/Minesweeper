@@ -41,10 +41,10 @@ function createGrid(grid_size, bombs_number) {
   }
 
   const array = Array.from(Array(gridSize * gridSize).keys());
-  const ArrayHalf1 = array.slice(0, gridSize * gridSize / 2);
-  const ArrayHalf2 = array.slice(-gridSize * gridSize / 2);
-  const bombsArrayH1 = ArrayHalf1.sort(() => 0.5 - Math.random()).slice(0, bombsNumber / 2);
-  const bombsArrayH2 = ArrayHalf2.sort(() => 0.5 - Math.random()).slice(0, bombsNumber / 2);
+  const arrayHalf1 = array.slice(0, gridSize * gridSize / 2);
+  const arrayHalf2 = array.slice(-gridSize * gridSize / 2);
+  const bombsArrayH1 = arrayHalf1.sort(() => 0.5 - Math.random()).slice(0, bombsNumber / 2);
+  const bombsArrayH2 = arrayHalf2.sort(() => 0.5 - Math.random()).slice(0, bombsNumber / 2);
   const bombsArray = bombsArrayH1.concat(bombsArrayH2);
   for(let id of bombsArray) {
     document.getElementById(id).classList.add("hidden-bombs");
