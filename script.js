@@ -26,7 +26,7 @@ function createGrid(grid_size, bombs_number) {
   playArea.style.width = width.toString() + "px";
   const buttonSize = "30px ";
   playArea.style.gridTemplateColumns = buttonSize.repeat(gridSize);
-  for(let i = 0; i < gridSize * gridSize; ++i) {
+  for (let i = 0; i < gridSize * gridSize; ++i) {
     let gridButton = document.createElement("button");
     gridButton.setAttribute("type", "button");
     gridButton.classList.add("grid-button");
@@ -46,7 +46,7 @@ function createGrid(grid_size, bombs_number) {
   const bombsArrayH1 = arrayHalf1.sort(() => 0.5 - Math.random()).slice(0, bombsNumber / 2);
   const bombsArrayH2 = arrayHalf2.sort(() => 0.5 - Math.random()).slice(0, bombsNumber / 2);
   const bombsArray = bombsArrayH1.concat(bombsArrayH2);
-  for(let id of bombsArray) {
+  for (let id of bombsArray) {
     document.getElementById(id).classList.add("hidden-bombs");
   }
   let nearbyBombs = Array(gridSize * gridSize).fill(0);
@@ -76,7 +76,7 @@ function createGrid(grid_size, bombs_number) {
       ++nearbyBombs[id - gridSize + 1];
     }
   }
-  for(let i = 0; i < gridSize * gridSize; ++i) {
+  for (let i = 0; i < gridSize * gridSize; ++i) {
     let gridButton = document.getElementById(i);
     if (!gridButton.classList.contains("hidden-bombs")) {
       gridButton.setAttribute("data", nearbyBombs[i]);
@@ -113,7 +113,7 @@ function click(id) {
   } else {
     gridButton.classList.add("pushed-button");
     gridButton.disabled = true;
-    checkNearbyButtons(gridButton.id);
+    checkNearbyButtons(id);
     checkGameWon();
   }
 }
@@ -121,7 +121,7 @@ function click(id) {
 let flagsNumber = 0;
 
 function flagButton(gridButton) {
-  if(gameIsOver) {
+  if (gameIsOver) {
     return;
   }
   if (flagsNumber <= bombsNumber && !gridButton.classList.contains("pushed-button")) {
@@ -153,7 +153,7 @@ function countSeconds() {
 function gameOver() {
   document.getElementById("new-game").innerHTML = "<img src=\"Sad-face.png\"/>";
   let bombs = document.getElementsByClassName("hidden-bombs"); 
-  for(let bomb of bombs) {
+  for (let bomb of bombs) {
     bomb.classList.add("detonated-bomb"); 
   }
   clearInterval(timer);
@@ -176,7 +176,6 @@ function displayColor(nearbyBombs, gridButton) {
 
 function checkNearbyButtons(id) {
   setTimeout(() => {
-    id = parseInt(id);
     if (id % gridSize != gridSize - 1) {
       click(id + 1);
     }
